@@ -1,7 +1,7 @@
 # Wrapper script to run all compliance modules
 $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
 $logPath = "$PSScriptRoot\Logs\ComplianceRun_$timestamp.log"
-$Global:DryRun = $true  # Set to $false to apply changes
+$Global:DryRun = $false  # Run with -DryRun to perform DryRun
 
 # Ensure log folder exists
 New-Item -Path "$PSScriptRoot\Logs" -ItemType Directory -Force | Out-Null
