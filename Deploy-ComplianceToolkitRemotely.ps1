@@ -8,7 +8,7 @@ $localToolkitPath = "C:\ComplianceToolkit"  # Path to your toolkit on the admin 
 $remoteToolkitPath = "C$\ComplianceToolkit"  # Destination path on remote machines
 $remoteScriptPath = "C:\ComplianceToolkit\Run-ComplianceToolkit.ps1"
 $logFolder = "$PSScriptRoot\RemoteLogs"
-$dryRun = $true  # Set to $false to apply changes
+$Global:DryRun = $true  # Set to $false to apply changes
 
 New-Item -Path $logFolder -ItemType Directory -Force | Out-Null
 
