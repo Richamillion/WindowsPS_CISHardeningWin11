@@ -1,1 +1,1 @@
-# WindowsPS_CISHardeningWin11
+Most of the recommendations to harden Windows 11 machines are based on GPOs or simply recommend you spin up a CIS Hardened image in the cloud. While this is great, I wanted to create a script for non-domain joined machines, or at least, a generic script that could be run by another service. I could not find any examples to go off of so I took the results from a SIEM, exported them, and converted the values into Powershell commands that can be run locally or remotely. The scripts modifies registry keys to get the necessary results.
