@@ -1,6 +1,6 @@
 # Shared\Functions.ps1
 
-$Global:DryRun = $true  # Default; can be overridden by Run or Deploy remote scripts
+$Global:DryRun = $false  # Run with -DryRun to perform DryRun
 
 function Set-RegistryValueIfNeeded {
     param (
