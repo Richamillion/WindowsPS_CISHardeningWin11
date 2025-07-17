@@ -1,4 +1,9 @@
 # === CONFIGURATION ===
+
+param (
+    [switch]$DryRun
+)
+
 $computers = @("PC01", "PC02", "PC03")  # Replace with your target hostnames
 
 # Optional: Pull from Active Directory
@@ -8,7 +13,7 @@ $localToolkitPath = "C:\ComplianceToolkit"  # Path to your toolkit on the admin 
 $remoteToolkitPath = "C$\ComplianceToolkit"  # Destination path on remote machines
 $remoteScriptPath = "C:\ComplianceToolkit\Run-ComplianceToolkit.ps1"
 $logFolder = "$PSScriptRoot\RemoteLogs"
-$Global:DryRun = $false  # Run with -DryRun to perform DryRun
+$Global:DryRun = $DryRun.IsPresent  # Set global DryRun flag
 
 New-Item -Path $logFolder -ItemType Directory -Force | Out-Null
 
@@ -23,8 +28,8 @@ foreach ($computer in $computers) {
         Copy-Item -Path $localToolkitPath -Destination $dest -Recurse -Force
         Write-Host "✔ Toolkit copied to $computer"
     } catch {
-        Write-Warning "❌ Failed to copy to $computer: $_"
-        Add-Content -Path "$logFolder\CopyErrors.log" -Value "[$(Get-Date)] $computer: $_"
+        Write-Warning "❌ Failed to copy to ${computer}: $_"
+        Add-Content -Path "$logFolder\CopyErrors.log" -Value "[$(Get-Date)] ${computer}: $_"
     }
 }
 
@@ -51,8 +56,8 @@ foreach ($computer in $computers) {
             Out-File -FilePath "$logFolder\$computer.log"
         Write-Host "✔ Execution complete for $computer. Log saved."
     } catch {
-        Write-Warning "❌ Execution failed on $computer: $_"
-        Add-Content -Path "$logFolder\ExecutionErrors.log" -Value "[$(Get-Date)] $computer: $_"
+        Write-Warning "❌ Execution failed on ${computer}: $_"
+        Add-Content -Path "$logFolder\ExecutionErrors.log" -Value "[$(Get-Date)] ${computer}: $_"
     }
 }
 

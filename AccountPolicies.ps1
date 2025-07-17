@@ -4,18 +4,18 @@ Write-Host "`n=== Applying Account Policies ===`n"
 
 # Rename default accounts
 try {
-    $admin = Get-LocalUser -Name "Administrator" -ErrorAction SilentlyContinue
-    if ($admin) {
-        Rename-LocalUser -Name "Administrator" -NewName "AdminCustom"
-        Write-Host "Renamed 'Administrator' to 'AdminCustom'"
-    } else {
-        Write-Host "'Administrator' account already renamed or not found."
-    }
+#    $admin = Get-LocalUser -Name "Administrator" -ErrorAction SilentlyContinue
+#    if ($admin) {
+#        Rename-LocalUser -Name "Administrator" -NewName "AdminCustom"
+#        Write-Host "Renamed 'Administrator' to 'AdminCustom'"
+#    } else {
+#        Write-Host "'Administrator' account already renamed or not found."
+#    }
 
     $guest = Get-LocalUser -Name "Guest" -ErrorAction SilentlyContinue
     if ($guest) {
-        Rename-LocalUser -Name "Guest" -NewName "GuestCustom"
-        Write-Host "Renamed 'Guest' to 'GuestCustom'"
+        Rename-LocalUser -Name "Guest" -NewName "GuestNotWelcome"
+        Write-Host "Renamed 'Guest' to 'GuestNotWelcome'"
     } else {
         Write-Host "'Guest' account already renamed or not found."
     }

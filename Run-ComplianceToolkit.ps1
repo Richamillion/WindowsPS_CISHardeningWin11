@@ -1,12 +1,17 @@
 # Wrapper script to run all compliance modules
+
+param (
+    [switch]$DryRun
+)
+
 $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
 $logPath = "$PSScriptRoot\Logs\ComplianceRun_$timestamp.log"
-$Global:DryRun = $false  # Run with -DryRun to perform DryRun
+$Global:DryRun = $DryRun.IsPresent  # Set global DryRun flag
 
 # Ensure log folder exists
 New-Item -Path "$PSScriptRoot\Logs" -ItemType Directory -Force | Out-Null
 
-function Run-Module {
+function Start-Module {
     param (
         [string]$ModuleName
     )
@@ -19,8 +24,8 @@ function Run-Module {
         }
         Add-Content -Path $logPath -Value "[$(Get-Date)] $ModuleName completed successfully."
     } catch {
-        Write-Warning "Error running $ModuleName: $_"
-        Add-Content -Path $logPath -Value "[$(Get-Date)] ERROR in $ModuleName: $_"
+        Write-Warning "Error running ${ModuleName}: $_"
+        Add-Content -Path $logPath -Value "[$(Get-Date)] ERROR in ${ModuleName}: $_"
     }
 }
 
