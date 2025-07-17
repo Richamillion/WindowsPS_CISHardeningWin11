@@ -1,6 +1,6 @@
 # Shared\Functions.ps1
 
-$Global:DryRun = $false  # Run with -DryRun to perform DryRun
+$Global:DryRun = $DryRun.IsPresent  # Set global DryRun flag
 
 function Set-RegistryValueIfNeeded {
     param (
