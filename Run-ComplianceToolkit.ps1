@@ -45,7 +45,7 @@ $modules = @(
 )
 
 foreach ($mod in $modules) {
-    Run-Module -ModuleName $mod
+    Start-Module -ModuleName $mod
 }
 
 Write-Host "`n✅ Compliance toolkit execution complete."
